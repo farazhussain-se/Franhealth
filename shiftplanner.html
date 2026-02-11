@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franciscan Health - Shift Dashboard</title>
+    <style>
+        /* --- Color Update: #22548f and White --- */
+        :root {
+            --fh-primary-blue: #22548f; 
+            --white: #ffffff;
+            --off-white: #f8f9fa;
+            --border-color: #d1d9e6;
+            --text-main: #22548f;
+            --text-muted: #546e7a;
+            --shadow: 0 4px 20px rgba(34, 84, 143, 0.15);
+            --radius: 6px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* --- Main Widget Container --- */
+        .widget-container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--fh-primary-blue);
+        }
+
+        /* --- Header (Collapsible Trigger) --- */
+        .widget-header {
+            background-color: var(--fh-primary-blue);
+            color: var(--white);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .brand-logo {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 20px;
+            height: 20px;
+            background-color: var(--white);
+            mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 3h-2v8H3v2h8v8h2v-8h8v-2h-8V3z"/></svg>') no-repeat center;
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 3h-2v8H3v2h8v8h2v-8h8v-2h-8V3z"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .collapse-indicator {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsed .collapse-indicator {
+            transform: rotate(-90deg);
+        }
+
+        /* --- Collapsible Content Animation --- */
+        .collapsible-body {
+            max-height: 800px;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .collapsed .collapsible-body {
+            max-height: 0;
+        }
+
+        /* --- Content Area --- */
+        .dashboard-content {
+            padding: 24px;
+        }
+
+        .section-header {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--fh-primary-blue);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .shift-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .shift-card {
+            border: 1px solid var(--border-color);
+            background: var(--white);
+            padding: 16px;
+            border-radius: var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color 0.2s;
+        }
+
+        .shift-card:hover {
+            border-color: var(--fh-primary-blue);
+        }
+
+        .shift-info h3 {
+            font-size: 0.95rem;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .shift-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .btn-action {
+            background-color: var(--white);
+            border: 1.5px solid var(--fh-primary-blue);
+            color: var(--fh-primary-blue);
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: var(--fh-primary-blue);
+            color: var(--white);
+        }
+
+        /* --- Modal Updates --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(34, 84, 143, 0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal-box {
+            background: var(--white);
+            padding: 24px;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 400px;
+            border-top: 6px solid var(--fh-primary-blue);
+        }
+
+        .btn-confirm {
+            background-color: var(--fh-primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-confirm:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="widget-container" id="shiftWidget">
+        <header class="widget-header" onclick="toggleCollapse()">
+            <div class="brand-logo">
+                <div class="logo-icon"></div>
+                FRANCISCAN HEALTH
+            </div>
+            <span class="collapse-indicator">▼</span>
+        </header>
+
+        <div class="collapsible-body">
+            <div class="dashboard-content">
+                <div class="section-header">Upcoming Schedule</div>
+                
+                <div class="shift-list">
+                    <div class="shift-card">
+                        <div class="shift-info">
+                            <h3>Monday, March 2</h3>
+                            <p>08:00 AM - 05:00 PM</p>
+                        </div>
+                        <button class="btn-action" onclick="event.stopPropagation(); showModal('Monday, March 2')">Switch</button>
+                    </div>
+
+                    <div class="shift-card">
+                        <div class="shift-info">
+                            <h3>Wednesday, March 4</h3>
+                            <p>07:00 PM - 07:00 AM</p>
+                        </div>
+                        <button class="btn-action" onclick="event.stopPropagation(); showModal('Wednesday, March 4')">Switch</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box">
+            <h2 style="color: var(--fh-primary-blue); margin-bottom: 10px; font-size: 1.2rem;">Request Shift Coverage</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+                Requesting a switch for <strong id="dateDisplay"></strong>.
+            </p>
+            <button class="btn-confirm" onclick="submitRequest()">Submit Request</button>
+            <button onclick="closeModal()" style="width: 100%; background: none; border: none; margin-top: 12px; color: #888; cursor: pointer; font-size: 0.85rem;">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        const widget = document.getElementById('shiftWidget');
+        const modal = document.getElementById('modal');
+
+        function toggleCollapse() {
+            widget.classList.toggle('collapsed');
+        }
+
+        function showModal(date) {
+            document.getElementById('dateDisplay').innerText = date;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function submitRequest() {
+            alert('Your request has been submitted to the scheduling office.');
+            closeModal();
+        }
+
+        window.onclick = (e) => { if(e.target == modal) closeModal(); }
+    </script>
+</body>
+</html>
