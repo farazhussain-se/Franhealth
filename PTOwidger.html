@@ -3,11 +3,11 @@
         .pto-widget {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e1e4e8;
-            padding: 20px;
-            max-width: 380px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border: 1px solid #d1d9e6;
+            padding: 24px;
+            max-width: 400px;
             margin: 10px auto;
             color: #333;
             box-sizing: border-box;
@@ -16,129 +16,151 @@
         .pto-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #22548f;
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #f0f2f5;
-            padding-bottom: 12px;
-        }
-
-        .pto-header svg {
-            fill: #22548f;
-            width: 20px;
-            height: 20px;
-        }
-
-        .pto-category {
+            justify-content: space-between;
             margin-bottom: 24px;
         }
 
-        .pto-label-row {
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #22548f;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .wd-icon-header {
+            width: 24px;
+            height: 24px;
+            fill: #22548f;
+        }
+
+        .pto-category {
+            margin-bottom: 28px;
+        }
+
+        .label-row {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
+            align-items: baseline;
             margin-bottom: 8px;
         }
 
-        .pto-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .category-name {
             font-weight: 600;
             font-size: 0.95rem;
             color: #444;
         }
 
-        .pto-count {
-            font-size: 0.85rem;
-            color: #22548f;
+        .balance-text {
             font-weight: 700;
+            font-size: 1.1rem;
+            color: #22548f;
         }
 
-        /* Progress Bar Logic */
-        .progress-container {
-            background-color: #e9ecef;
-            height: 10px;
+        .total-ref {
+            font-size: 0.8rem;
+            color: #777;
+            font-weight: 400;
+        }
+
+        /* Workday Style Progress Bar */
+        .progress-track {
+            background-color: #f0f2f5;
+            height: 8px;
             width: 100%;
-            border-radius: 5px;
+            border-radius: 4px;
             overflow: hidden;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .progress-fill {
             height: 100%;
             background-color: #22548f;
-            border-radius: 5px;
+            border-radius: 4px;
         }
 
-        .pto-subtext {
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
             font-size: 0.75rem;
-            color: #777;
-            display: block;
+            color: #666;
         }
 
-        /* Buttons */
-        .pto-cta {
+        .pending-tag {
+            color: #c05600; /* Subtle warning/pending color */
+            font-style: italic;
+        }
+
+        /* Action Button - Franciscan Blue */
+        .cta-btn {
             display: block;
             background-color: #22548f;
             color: #ffffff !important;
             text-align: center;
             text-decoration: none;
-            padding: 12px;
-            border-radius: 6px;
+            padding: 14px;
+            border-radius: 4px;
             font-weight: 700;
             font-size: 0.9rem;
-            margin-top: 8px;
-            transition: opacity 0.2s;
             border: none;
             width: 100%;
+            transition: background-color 0.2s ease;
             cursor: pointer;
         }
 
-        .pto-cta:hover {
-            opacity: 0.9;
+        .cta-btn:hover {
+            background-color: #1a416e;
         }
 
-        /* Responsive stack for mobile */
-        @media (max-width: 400px) {
-            .pto-widget {
-                max-width: 100%;
-                border-radius: 0;
-                box-shadow: none;
-                border: none;
-                border-bottom: 1px solid #eee;
-            }
+        .workday-link {
+            display: block;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 12px;
+            text-decoration: none;
         }
     </style>
 
     <div class="pto-header">
-        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
-        Time Off Balance
+        <div class="header-title">
+            <svg class="wd-icon-header" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+            Time Off Balance
+        </div>
     </div>
 
     <div class="pto-category">
-        <div class="pto-label-row">
-            <span class="pto-title">🌴 Vacation Days</span>
-            <span class="pto-count">12.5 of 15 days</span>
+        <div class="label-row">
+            <span class="category-name">🌴 Vacation Time</span>
+            <span class="balance-text">12.5 <span class="total-ref">/ 15 Days</span></span>
         </div>
-        <div class="progress-container">
+        <div class="progress-track">
             <div class="progress-fill" style="width: 83.3%;"></div>
         </div>
-        <span class="pto-subtext">Accrues monthly</span>
+        <div class="meta-row">
+            <span>Accrues Monthly</span>
+            <span class="pending-tag">1.5 days pending</span>
+        </div>
     </div>
 
     <div class="pto-category">
-        <div class="pto-label-row">
-            <span class="pto-title">🤒 Sick Days</span>
-            <span class="pto-count">5 of 8 days</span>
+        <div class="label-row">
+            <span class="category-name">🏥 Sick Leave</span>
+            <span class="balance-text">5.0 <span class="total-ref">/ 8 Days</span></span>
         </div>
-        <div class="progress-container">
+        <div class="progress-track">
             <div class="progress-fill" style="width: 62.5%;"></div>
         </div>
-        <span class="pto-subtext">Available immediately</span>
+        <div class="meta-row">
+            <span>Available Immediately</span>
+            <span>0 pending</span>
+        </div>
     </div>
 
-    <a href="#" class="pto-cta">Request Time Off</a>
+    <a href="#" class="cta-btn">Request Time Off</a>
+    
+    <a href="#" class="workday-link">View full details in Workday →</a>
 </div>
