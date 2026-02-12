@@ -1,0 +1,262 @@
+<div class="sn-widget-container">
+    <style>
+        .sn-widget-container {
+            font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #f5f7f9;
+            width: 380px;
+            border-radius: 6px;
+            border: 1px solid #dce0e5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin: 20px auto;
+            color: #485563;
+        }
+
+        /* ServiceNow Header Style */
+        .sn-header {
+            background-color: #fff;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e6e8ea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sn-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sn-logo-text {
+            font-weight: 700;
+            color: #293e40;
+            font-size: 1rem;
+        }
+        .sn-badge {
+            background-color: #e2f1ff;
+            color: #004B87; /* Franciscan Blue */
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        /* Search Bar Area */
+        .sn-search-hero {
+            background: linear-gradient(135deg, #004B87 0%, #003366 100%);
+            padding: 24px 20px;
+            text-align: center;
+        }
+        .sn-greeting {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-weight: 300;
+            text-align: left;
+        }
+        .sn-search-box {
+            position: relative;
+            width: 100%;
+        }
+        .sn-input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border-radius: 20px;
+            border: none;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .sn-search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Ticket List */
+        .sn-content {
+            padding: 0;
+            background: white;
+        }
+        .sn-section-title {
+            padding: 15px 20px 5px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #717171;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .ticket-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background 0.1s;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .ticket-item:hover {
+            background-color: #fcfcfc;
+        }
+        .ticket-main {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .ticket-number {
+            font-size: 0.8rem;
+            color: #004B87;
+            font-weight: 600;
+        }
+        .ticket-desc {
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: 500;
+        }
+        .ticket-meta {
+            font-size: 0.75rem;
+            color: #888;
+        }
+        
+        /* Status Pills */
+        .status-pill {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .status-wip {
+            background-color: #e6f7ff;
+            color: #0076ce;
+            border: 1px solid #bae7ff;
+        }
+        .status-closed {
+            background-color: #f6ffed;
+            color: #389e0d;
+            border: 1px solid #d9f7be;
+        }
+        .status-hold {
+            background-color: #fff7e6;
+            color: #d46b08;
+            border: 1px solid #ffd591;
+        }
+
+        /* Quick Actions Grid */
+        .sn-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 20px;
+            gap: 10px;
+            background-color: #f5f7f9;
+        }
+        .action-card {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #e1e1e1;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-color: #004B87;
+        }
+        .action-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .action-text {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #555;
+            display: block;
+        }
+
+        /* System Status Footer */
+        .sn-footer {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-top: 1px solid #e6e8ea;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #51a351; /* Green */
+        }
+    </style>
+
+    <!-- Header -->
+    <div class="sn-header">
+        <div class="sn-brand">
+            <span class="sn-logo-text">Service Portal</span>
+        </div>
+        <div class="sn-badge">IT SUPPORT</div>
+    </div>
+
+    <!-- Hero Search -->
+    <div class="sn-search-hero">
+        <div class="sn-greeting">Hi Ron, how can we help?</div>
+        <div class="sn-search-box">
+            <span class="sn-search-icon">🔍</span>
+            <input type="text" class="sn-input" placeholder="Search for knowledge or catalog items..." onkeyup="if(event.key === 'Enter') alert('Opening Knowledge Base search for: ' + this.value)">
+        </div>
+    </div>
+
+    <!-- Active Tickets List -->
+    <div class="sn-content">
+        <div class="sn-section-title">My Open Requests</div>
+        
+        <!-- Ticket 1 -->
+        <div class="ticket-item" onclick="alert('Opening Incident INC0283911 details...')">
+            <div class="ticket-main">
+                <span class="ticket-number">INC0283911</span>
+                <span class="ticket-desc">Epic Hyperspace login failure</span>
+                <span class="ticket-meta">Updated: 2h ago</span>
+            </div>
+            <span class="status-pill status-wip">In Progress</span>
+        </div>
+
+        <!-- Ticket 2 -->
+        <div class="ticket-item" onclick="alert('Opening Request RITM004522 details...')">
+            <div class="ticket-main">
+                <span class="ticket-number">RITM004522</span>
+                <span class="ticket-desc">New Employee Badge - R. Swanson</span>
+                <span class="ticket-meta">Updated: 1d ago</span>
+            </div>
+            <span class="status-pill status-hold">Waiting</span>
+        </div>
+    </div>
+
+    <!-- Quick Action Grid -->
+    <div class="sn-actions">
+        <div class="action-card" onclick="alert('Launching Create Incident form...')">
+            <span class="action-icon">⚠️</span>
+            <span class="action-text">Report Issue</span>
+        </div>
+        <div class="action-card" onclick="alert('Launching Hardware Catalog...')">
+            <span class="action-icon">💻</span>
+            <span class="action-text">Request Item</span>
+        </div>
+        <div class="action-card" onclick="alert('Opening System Status page...')">
+            <span class="action-icon">📢</span>
+            <span class="action-text">Outages</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="sn-footer">
+        <div class="status-dot"></div>
+        <span>All Systems Operational (Including Epic)</span>
+    </div>
+</div>
