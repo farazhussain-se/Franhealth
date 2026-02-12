@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franciscan Health Digital ID</title>
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .badge-card {
+            background: white;
+            width: 320px;
+            height: 550px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+        .header {
+            background-color: #004B87; /* Franciscan Blue */
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .photo-container {
+            width: 130px;
+            height: 130px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: -65px auto 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .photo-placeholder {
+            font-size: 3rem;
+            color: #999;
+        }
+        .employee-info h1 {
+            margin: 5px 0;
+            color: #333;
+            font-size: 1.8rem;
+        }
+        .role-badge {
+            background-color: #e3f2fd;
+            color: #004B87;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .details {
+            display: flex;
+            justify-content: space-around;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+        .detail-item p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .detail-item strong {
+            display: block;
+            font-size: 0.95rem;
+            color: #333;
+        }
+        .qr-section {
+            border-top: 1px dashed #ccc;
+            padding-top: 20px;
+            margin: 0 20px;
+        }
+        .qr-placeholder {
+            width: 80px;
+            height: 80px;
+            background-color: #333;
+            margin: 0 auto 10px;
+        }
+        .footer-status {
+            font-size: 0.8rem;
+            color: #28a745;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background-color: #28a745;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="badge-card">
+        <div class="header">
+            <h2>Franciscan Health</h2>
+        </div>
+        
+        <div class="photo-container">
+            <!-- Replace with actual img tag if needed -->
+            <span class="photo-placeholder">📷</span>
+        </div>
+
+        <div class="employee-info">
+            <h1>Ron</h1>
+            <span class="role-badge">Registered Nurse</span>
+        </div>
+
+        <div class="details">
+            <div class="detail-item">
+                <p>DEPARTMENT</p>
+                <strong>Emergency</strong>
+            </div>
+            <div class="detail-item">
+                <p>CAMPUS</p>
+                <strong>Indianapolis</strong>
+            </div>
+        </div>
+
+        <div class="qr-section">
+            <div class="qr-placeholder" style="background: url('https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Ron-Nurse-0042') no-repeat center/cover;"></div>
+            <div class="footer-status">
+                <div class="pulse"></div> ACTIVE ACCESS
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
